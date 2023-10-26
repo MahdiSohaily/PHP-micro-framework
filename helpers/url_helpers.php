@@ -7,5 +7,5 @@ function site_url($url = '')
 
 function asset_url($url = '')
 {
-    return site_url('asset' . $url);
+    return site_url('public/' . $url);
 }
