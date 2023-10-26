@@ -1,8 +1,9 @@
 <!-- Front controller -->
 <?php
-include './vendor/autoload.php';
-echo "Here we go...";
+include_once('./bootstrap/init.php');
 
 use App\Core\Request;
 
 new Request();
+
+print_r($_ENV);
