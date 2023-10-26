@@ -1,6 +1,9 @@
 <?php
-define('BASEPATH', __DIR__ . '/../');
-include_once BASEPATH . '/vendor/autoload.php';
+define('BASE_PATH', __DIR__ . '/../');
 
-$dotenv = Dotenv\Dotenv::createImmutable(BASEPATH);
+require_once(BASE_PATH . '/vendor/autoload.php');
+require_once(BASE_PATH . '/helpers/helpers.php');
+
+
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();

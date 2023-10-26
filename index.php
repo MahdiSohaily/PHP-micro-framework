@@ -1,9 +1,9 @@
 <!-- Front controller -->
 <?php
+
 include_once('./bootstrap/init.php');
 
-use App\Core\Request;
-
-new Request();
-
-print_r($_ENV);
+print_r(site_url());
+?>
+<link href="<?php echo site_url(); ?>" rel="stylesheet" type="text/css">
+</link>
