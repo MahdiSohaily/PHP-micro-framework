@@ -15,8 +15,6 @@ class Url
 
         $parts = parse_url(self::current());
 
-        var_dump($parts['query']);
-
         if (isset($parts['query'])) {
             parse_str($parts['query'], $query);
         }
