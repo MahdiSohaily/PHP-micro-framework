@@ -2,6 +2,7 @@
 <?php
 
 use App\Utilities\Asset;
+use App\Utilities\Url;
 
 include_once('./bootstrap/init.php');
 
@@ -13,3 +14,5 @@ print_r(site_url());
 <?php
 
 echo '<br />' . Asset::css('styles.css');
+echo '<br />';
+print_r(Url::query_params());
