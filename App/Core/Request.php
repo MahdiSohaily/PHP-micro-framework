@@ -43,4 +43,8 @@ class Request
     {
         return $this->ip;
     }
+
+    public function __callStatic($method, $args){
+        return 
+    }
 }
