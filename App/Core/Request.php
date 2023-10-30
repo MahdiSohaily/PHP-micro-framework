@@ -13,7 +13,7 @@ class Request
     function __construct()
     {
         $this->params = $_REQUEST;
-        $this->method = $_SERVER["REQUEST_METHOD"];
+        $this->method = strtolower($_SERVER["REQUEST_METHOD"]);
         $this->uri = $_SERVER["REQUEST_URI"];
         $this->agent = $_SERVER["HTTP_USER_AGENT"];
         $this->ip = $_SERVER["REMOTE_ADDR"];
@@ -42,5 +42,9 @@ class Request
     public function getIp(): string
     {
         return $this->ip;
+    }
+    public function getUri(): string
+    {
+        return $this->uri;
     }
 }
