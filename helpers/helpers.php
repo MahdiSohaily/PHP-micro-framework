@@ -9,3 +9,12 @@ function asset_url(string $url = ''): string
 {
     return site_url('public/' . $url);
 }
+
+
+function view($path = '')
+{
+    $filePath = str_replace('.', '/', $path);
+
+    $fullPath = BASE_PATH . "views/$filePath.php";
+    include_once $fullPath;
+}

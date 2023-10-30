@@ -6,17 +6,17 @@ use App\Core\Routing\Router;
 
 include_once('./bootstrap/init.php');
 
-Route::add(['get', 'post'], '/s', function () {
+Route::add(['get', 'post'], '/home', function () {
     echo '<div class=""> Hello</div>';
 });
 
-Route::post('/', function () {
+Route::post('/create', function () {
 });
 
-Route::get('/s', function () {
+Route::get('/about', function () {
 });
 
 
 $router = new Router();
 
-
+$router->run();
