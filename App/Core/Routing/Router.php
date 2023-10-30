@@ -40,6 +40,8 @@ class Router
             $this->dispatch405();
             die("Invalid request");
         }
+
+        $this->dispatch($this->current_route);
     }
 
 
@@ -64,7 +66,51 @@ class Router
         die();
     }
 
-    private function dispatch()
+    private function dispatch($route)
     {
+        $action = $route["action"];
+
+        if (is_null($action) || empty($action)) {
+            return false;
+        }
+
+        if (is_callable($action)) {
+            $action();
+        }
+
+        if (is_string($action)) {
+            $fractions = explode("@", $action);
+            $controller =  "App\Controllers\\" . $fractions[0];
+            $method = $fractions[1];
+
+            if (!class_exists($controller)) {
+                throw new \Exception("class $controller does not exist");
+            }
+
+            $controller_object = new $controller();
+
+            if (!method_exists($controller_object, $method)) {
+                throw new \Exception("method $method does not exist");
+            }
+
+            $controller_object->$method();
+        }
+
+        if (is_array($action)) {
+            $controller = "App\Controllers\\" . $action[0];
+            $method = $action[1];
+
+            if (!class_exists($controller)) {
+                throw new \Exception("class $controller does not exist");
+            }
+
+            $controller_object = new $controller();
+
+            if (!method_exists($controller_object, $method)) {
+                throw new \Exception("method $method does not exist");
+            }
+
+            $controller_object->$method();
+        }
     }
 }

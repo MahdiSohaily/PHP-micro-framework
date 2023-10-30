@@ -7,7 +7,7 @@ use App\Core\Routing\Router;
 include_once('./bootstrap/init.php');
 
 Route::add(['get', 'post'], '/home', function () {
-    echo '<div class=""> Hello</div>';
+    echo '<h1 class=""> Hello</h1>';
 });
 
 Route::post('/create', function () {
@@ -15,6 +15,9 @@ Route::post('/create', function () {
 
 Route::get('/about', function () {
 });
+
+Route::get('/products', 'ProductsController@show');
+Route::get('/post', ['ProductsController', 'post']);
 
 
 $router = new Router();
