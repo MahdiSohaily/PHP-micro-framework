@@ -82,35 +82,28 @@ class Router
             $fractions = explode("@", $action);
             $controller =  "App\Controllers\\" . $fractions[0];
             $method = $fractions[1];
-
-            if (!class_exists($controller)) {
-                throw new \Exception("class $controller does not exist");
-            }
-
-            $controller_object = new $controller();
-
-            if (!method_exists($controller_object, $method)) {
-                throw new \Exception("method $method does not exist");
-            }
-
-            $controller_object->$method();
+            $this->passRequest($controller, $method);
         }
 
         if (is_array($action)) {
             $controller = "App\Controllers\\" . $action[0];
             $method = $action[1];
-
-            if (!class_exists($controller)) {
-                throw new \Exception("class $controller does not exist");
-            }
-
-            $controller_object = new $controller();
-
-            if (!method_exists($controller_object, $method)) {
-                throw new \Exception("method $method does not exist");
-            }
-
-            $controller_object->$method();
+            $this->passRequest($controller, $method);
         }
+    }
+
+    function passRequest(string $controller, string $method)
+    {
+        if (!class_exists($controller)) {
+            throw new \Exception("class $controller does not exist");
+        }
+
+        $controller_object = new $controller();
+
+        if (!method_exists($controller_object, $method)) {
+            throw new \Exception("method $method does not exist");
+        }
+
+        $controller_object->$method();
     }
 }
