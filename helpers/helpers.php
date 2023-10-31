@@ -11,8 +11,10 @@ function asset_url(string $url = ''): string
 }
 
 
-function view($path = '')
+function view($path = '', $data = [])
 {
+    extract($data);
+    
     $filePath = str_replace('.', '/', $path);
 
     $fullPath = BASE_PATH . "views/$filePath.php";
