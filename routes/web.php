@@ -2,6 +2,7 @@
 
 use App\Core\Routing\Route;
 use App\Core\Routing\Router;
+use App\Middleware\BlockFirefox;
 
 
 Route::add(['get', 'post'], '/home', function () {
@@ -14,7 +15,7 @@ Route::post('/create', function () {
 Route::get('/about', function () {
 });
 
-Route::get('/products', 'ProductsController@show');
+Route::get('/products', 'ProductsController@show', BlockFirefox::class);
 Route::get('/post', ['ProductsController', 'post']);
 
 
