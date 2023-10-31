@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Middleware\interface;
+namespace App\Middlewares\interface;
 
 interface MiddlewareInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Middlewares;
 
-use App\Middleware\interface\MiddlewareInterface;
+use App\Middlewares\interface\MiddlewareInterface;
 
 class BlockFirefox implements MiddlewareInterface
 {
