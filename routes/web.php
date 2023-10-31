@@ -9,13 +9,12 @@ Route::add(['get', 'post'], '/home', function () {
     echo '<h1 class=""> Hello</h1>';
 });
 
-Route::post('/create', function () {
-});
+Route::post('/create', null);
 
 Route::get('/about', function () {
 });
 
-Route::get('/products', 'ProductsController@show', BlockFirefox::class);
+Route::get('/products', 'ProductsController@show', [BlockFirefox::class]);
 Route::get('/post', ['ProductsController', 'post']);
 
 

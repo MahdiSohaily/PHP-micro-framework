@@ -10,14 +10,27 @@ class Router
 {
     private $request;
     private $routes;
-    private $current_route;
+    private $currentRoute;
 
 
     public function __construct()
     {
         $this->request = new Request;
         $this->routes = Route::routes();
-        $this->current_route = $this->findRoute($this->request) ?? null;
+        $this->currentRoute = $this->findRoute($this->request) ?? null;
+
+        // Check Middleware
+        $this->runMiddleware($this->currentRoute);
+    }
+
+    function runMiddleware(array $route)
+    {
+        $middlewares = $route['middleware'];
+
+        foreach ($middlewares as $middlewareClass) {
+            $middleware = new $middlewareClass();
+            $middleware->handle();
+        }
     }
 
     public function findRoute(Request $request)
@@ -32,7 +45,7 @@ class Router
 
     public function run()
     {
-        if (is_null($this->current_route)) {
+        if (is_null($this->currentRoute)) {
             $this->dispatch404();
         }
 
@@ -41,9 +54,8 @@ class Router
             die("Invalid request");
         }
 
-        $this->dispatch($this->current_route);
+        $this->dispatch($this->currentRoute);
     }
-
 
     private function invalidRequest(Request $request)
     {
@@ -53,10 +65,11 @@ class Router
             }
         }
     }
-
     private function dispatch405()
     {
         header("HTTP/1.0 405 Method Not Allowed");
+        view("errors.405");
+        die();
     }
 
     private function dispatch404()
@@ -66,7 +79,7 @@ class Router
         die();
     }
 
-    private function dispatch($route)
+    private function dispatch(array $route)
     {
         $action = $route["action"];
 
