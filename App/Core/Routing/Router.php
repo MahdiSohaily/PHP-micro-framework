@@ -18,9 +18,6 @@ class Router
         $this->request = new Request;
         $this->routes = Route::routes();
         $this->currentRoute = $this->findRoute($this->request) ?? null;
-
-        // Check Middleware
-        $this->runMiddleware($this->currentRoute);
     }
 
     function runMiddleware(array $route)
@@ -50,6 +47,11 @@ class Router
         }
 
         if ($this->invalidRequest($this->request)) {
+            $this->dispatch405();
+            die("Invalid request");
+        }
+
+        if ($this->runMiddleware($this->currentRoute)) {
             $this->dispatch405();
             die("Invalid request");
         }
@@ -104,7 +106,6 @@ class Router
             $this->passRequest($controller, $method);
         }
     }
-
     function passRequest(string $controller, string $method)
     {
         if (!class_exists($controller)) {

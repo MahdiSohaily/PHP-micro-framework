@@ -2,7 +2,12 @@
 
 use App\Core\Routing\Route;
 use App\Core\Routing\Router;
-use App\Middleware\BlockFirefox;
+use App\Middlewares\BlockFirefox;
+
+
+Route::get('/', function () {
+    echo 'Welcome to the Home Page';
+}, [BlockFirefox::class]);
 
 
 Route::add(['get', 'post'], '/home', function () {
@@ -12,6 +17,7 @@ Route::add(['get', 'post'], '/home', function () {
 Route::post('/create', null);
 
 Route::get('/about', function () {
+    echo 'welcome to the About Page';
 });
 
 Route::get('/products', 'ProductsController@show', [BlockFirefox::class]);
@@ -19,5 +25,4 @@ Route::get('/post', ['ProductsController', 'post']);
 
 
 $router = new Router();
-
 $router->run();
