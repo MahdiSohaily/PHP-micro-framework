@@ -25,7 +25,7 @@ class Router
             if (!in_array($request->getMethod(), $route['method'])) {
                 continue;
             }
-            
+
             if ($this->regex_matched($route)) {
                 return $route;
             }
@@ -35,7 +35,7 @@ class Router
 
     function regex_matched($route)
     {
-        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . "$/";
+        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . "$|\/$/";
         $result = preg_match($pattern, $this->request->getUri(), $matches);
 
         if (!$result) {
@@ -55,7 +55,6 @@ class Router
     }
     public function run()
     {
-        print_r($this->currentRoute);
         if (is_null($this->currentRoute)) {
             $this->dispatch404();
         }
