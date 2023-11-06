@@ -19,6 +19,30 @@ class Router
         $this->routes = Route::routes();
         $this->currentRoute = $this->findRoute($this->request) ?? null;
     }
+    public function findRoute(Request $request)
+    {
+        foreach ($this->routes as $route) {
+            if (!in_array($request->getMethod(), $route['method'])) {
+                continue;
+            }
+
+            if ($this->regex_matched($route)) {
+                return $route;
+            }
+        }
+        return null;
+    }
+
+    function regex_matched($route)
+    {
+        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . "$/";
+        $result = preg_match($pattern, $this->request->getUri(), $matches);
+
+        if (!$result) {
+            return false;
+        }
+        return true;
+    }
 
     function runMiddleware(array $route)
     {
@@ -29,39 +53,9 @@ class Router
             $middleware->handle();
         }
     }
-
-    public function findRoute(Request $request)
-    {
-        foreach ($this->routes as $route) {
-            if (!in_array($request->getMethod(), $route['method'])) {
-                return false;
-            }
-
-            if ($this->isRouteMatch($route['uri'])) {
-                return $route;
-            } else {
-                echo 'here';
-            }
-        }
-
-        return null;
-    }
-
-    function isRouteMatch($route)
-    {
-        echo $route . '<br />';
-        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route) . "$/";
-
-        $result = preg_match($pattern, $this->request->getUri(), $matches);
-
-        if ($result) {
-            var_dump($route);
-        }
-
-        return $result ?? false;
-    }
     public function run()
     {
+        print_r($this->currentRoute);
         if (is_null($this->currentRoute)) {
             $this->dispatch404();
         }

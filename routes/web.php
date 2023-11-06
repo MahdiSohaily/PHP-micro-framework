@@ -13,11 +13,13 @@ Route::add(['get', 'post'], '/home', function () {
     echo '<h1 class=""> Hello</h1>';
 });
 
-Route::post('/create', null);
+Route::get('/post/{slug}', ['ProductsController', 'post']);
+
+Route::post('/create', function () {
+});
 
 Route::get('/about', function () {
     echo 'welcome to the About Page';
 });
 
 Route::get('/products', 'ProductsController@show', [BlockFirefox::class]);
-Route::get('/post/{slug}', ['ProductsController', 'post']);
