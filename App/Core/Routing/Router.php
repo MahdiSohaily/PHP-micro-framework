@@ -33,13 +33,33 @@ class Router
     public function findRoute(Request $request)
     {
         foreach ($this->routes as $route) {
-            if (in_array($request->getMethod(), $route['method']) && $request->getUri() == $route['uri']) {
+            if (!in_array($request->getMethod(), $route['method'])) {
+                return false;
+            }
+
+            if ($this->isRouteMatch($route['uri'])) {
                 return $route;
+            } else {
+                echo 'here';
             }
         }
+
         return null;
     }
 
+    function isRouteMatch($route)
+    {
+        echo $route . '<br />';
+        $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route) . "$/";
+
+        $result = preg_match($pattern, $this->request->getUri(), $matches);
+
+        if ($result) {
+            var_dump($route);
+        }
+
+        return $result ?? false;
+    }
     public function run()
     {
         if (is_null($this->currentRoute)) {

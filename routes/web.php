@@ -1,7 +1,6 @@
 <?php
 
 use App\Core\Routing\Route;
-use App\Core\Routing\Router;
 use App\Middlewares\BlockFirefox;
 
 
@@ -21,8 +20,4 @@ Route::get('/about', function () {
 });
 
 Route::get('/products', 'ProductsController@show', [BlockFirefox::class]);
-Route::get('/post', ['ProductsController', 'post']);
-
-
-$router = new Router();
-$router->run();
+Route::get('/post/{slug}', ['ProductsController', 'post']);
