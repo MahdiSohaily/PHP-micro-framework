@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\interface;
+namespace App\Models\contracts;
 
 interface CrudInterface
 {

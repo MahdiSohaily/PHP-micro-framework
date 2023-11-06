@@ -2,7 +2,7 @@
 
 namespace App\Middlewares;
 
-use App\Middlewares\interface\MiddlewareInterface;
+use App\Middlewares\Contracts\MiddlewareInterface;
 
 class BlockFirefox implements MiddlewareInterface
 {
