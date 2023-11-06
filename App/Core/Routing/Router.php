@@ -25,7 +25,7 @@ class Router
             if (!in_array($request->getMethod(), $route['method'])) {
                 continue;
             }
-
+            
             if ($this->regex_matched($route)) {
                 return $route;
             }

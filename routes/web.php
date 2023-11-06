@@ -4,19 +4,18 @@ use App\Core\Routing\Route;
 use App\Middlewares\BlockFirefox;
 
 
-Route::get('/', function () {
+Route::post('/', function () {
     echo 'Welcome to the Home Page';
 }, [BlockFirefox::class]);
 
 
-Route::add(['get', 'post'], '/home', function () {
+Route::add(['post'], '/home', function () {
     echo '<h1 class=""> Hello</h1>';
 });
 
 Route::get('/post/{slug}', ['ProductsController', 'post']);
 
-Route::post('/create', function () {
-});
+Route::post('/create', null);
 
 Route::get('/about', function () {
     echo 'welcome to the About Page';
