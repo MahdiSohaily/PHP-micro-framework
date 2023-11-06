@@ -35,12 +35,20 @@ class Router
 
     function regex_matched($route)
     {
+        global $request;
         $pattern = "/^" . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . "$|\/$/";
         $result = preg_match($pattern, $this->request->getUri(), $matches);
 
         if (!$result) {
             return false;
         }
+
+        foreach ($matches as $key => $value) {
+            if (!is_int($key)) {
+                $request->setParams($key, $value);
+            }
+        }
+
         return true;
     }
 

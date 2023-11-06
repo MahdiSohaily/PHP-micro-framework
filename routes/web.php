@@ -22,3 +22,5 @@ Route::get('/about', function () {
 });
 
 Route::get('/products', 'ProductsController@show', [BlockFirefox::class]);
+
+Route::get('/post/{slug}/comment/{id}', ['ProductsController', 'post']);
