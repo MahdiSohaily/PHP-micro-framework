@@ -6,8 +6,9 @@ use App\Models\User;
 
 include_once('./bootstrap/init.php');
 
-// $user = new User();
-// $user->create(['name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
+$user = new User();
+// $user->create(['id' => 1, 'name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
+$user->find(1);
 
 $router = new Router();
 $router->run();

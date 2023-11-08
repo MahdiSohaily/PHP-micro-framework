@@ -11,7 +11,6 @@ class JsonBaseModel extends BaseModel
     public function __construct()
     {
         $this->db_path = BASE_PATH . 'storage/jsondb/';
-        $this->table = 'users';
         $this->table_file_path = $this->db_path  . $this->table . '.json';
     }
 
@@ -38,7 +37,14 @@ class JsonBaseModel extends BaseModel
     // read
     public function find(int $id): object
     {
+        $table_data = $this->read_table();
 
+        foreach ($table_data as $record) {
+            if (isset($record->id) && $record->id == $id) {
+                var_dump($record);
+                echo '<br />';
+            }
+        }
         return (object)[];
     }
 

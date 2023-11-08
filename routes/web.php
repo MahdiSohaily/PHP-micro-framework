@@ -4,12 +4,12 @@ use App\Core\Routing\Route;
 use App\Middlewares\BlockFirefox;
 
 
-Route::post('/', function () {
+Route::get('/', function () {
     echo 'Welcome to the Home Page';
 }, [BlockFirefox::class]);
 
 
-Route::add(['post'], '/home', function () {
+Route::add(['get'], '/home', function () {
     echo '<h1 class=""> Hello</h1>';
 });
 
