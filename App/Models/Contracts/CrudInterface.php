@@ -14,7 +14,7 @@ interface CrudInterface
 
     // update
 
-    public function update(array $columns, array $where): array;
+    public function update(array $columns, array $where): int;
     // delete
-    public function delete(array $where) : int;
+    public function delete(array $where): int;
 }
