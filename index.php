@@ -2,13 +2,16 @@
 <?php
 
 use App\Core\Routing\Router;
+use App\Models\Contracts\mysqlBaseModel;
 use App\Models\User;
 
 include_once('./bootstrap/init.php');
 
-$user = new User();
-// $user->create(['id' => 1, 'name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
-$user->find(1);
+// $user = new User();
+// // $user->create(['id' => 1, 'name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
+// $user->find(1);
+
+$mysql = new mysqlBaseModel();
 
 $router = new Router();
 $router->run();
