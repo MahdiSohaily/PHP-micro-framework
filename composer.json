@@ -1,6 +1,7 @@
 {
   "require": {
-    "vlucas/phpdotenv": "^5.5"
+    "vlucas/phpdotenv": "^5.5",
+    "catfan/medoo": "^2.1"
   },
   "autoload": {
     "psr-4": {

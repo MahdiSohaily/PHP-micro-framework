@@ -7,11 +7,12 @@ use App\Models\User;
 
 include_once('./bootstrap/init.php');
 
-// $user = new User();
-// // $user->create(['id' => 1, 'name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
-// $user->find(1);
+
 
 $mysql = new mysqlBaseModel();
+
+$user = new User();
+echo $user->create(['name' => 'Mahdi', 'last_name' => 'Rezaei' ,'email' => 'mahdi@gmail.com']);
 
 $router = new Router();
 $router->run();

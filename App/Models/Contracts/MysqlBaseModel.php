@@ -2,6 +2,8 @@
 
 namespace App\Models\Contracts;
 
+use Medoo\Medoo;
+
 
 class mysqlBaseModel extends BaseModel
 {
@@ -9,8 +11,14 @@ class mysqlBaseModel extends BaseModel
     public function __construct()
     {
         try {
-            $this->connection = new \PDO("mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}", $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
-            $this->connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->connection = new Medoo([
+                'type' => 'mysql',
+                'host' => $_ENV['DB_HOST'],
+                'database' => $_ENV['DB_NAME'],
+                'username' => $_ENV['DB_USER'],
+                'password' => $_ENV['DB_PASSWORD'],
+                'error' => \PDO::ERRMODE_EXCEPTION,
+            ]);
         } catch (\PDOException $th) {
             throw $th;
         }
@@ -18,7 +26,8 @@ class mysqlBaseModel extends BaseModel
     // create
     public function create(array $data): int
     {
-        return 0;
+        $this->connection->insert($this->table, $data);
+        return $this->connection->id() ?? -1;
     }
 
     // read

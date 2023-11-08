@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Contracts\JsonBaseModel;
+use App\Models\Contracts\mysqlBaseModel;
 
-class User extends JsonBaseModel
+class User extends mysqlBaseModel
 {
     protected $table = 'users';
 }
