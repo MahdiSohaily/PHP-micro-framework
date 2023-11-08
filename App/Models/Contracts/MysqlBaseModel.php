@@ -33,7 +33,8 @@ class mysqlBaseModel extends BaseModel
     // read
     public function find(int $id): object
     {
-        return (object) $this->connection->get($this->table, '*', [$this->primaryKey => $id]);
+        $record = $this->connection->get($this->table, '*', [$this->primaryKey => $id]);
+        return $this;
     }
     public function getAll(): array
     {

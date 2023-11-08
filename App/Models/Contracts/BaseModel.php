@@ -17,24 +17,24 @@ abstract class BaseModel implements CrudInterface
     }
 
 
-    protected function getPrimaryKey()
+    public function getPrimaryKey()
     {
         return $this->primaryKey;
     }
 
-    protected function setPrimaryKey($primaryKey)
+    public function setPrimaryKey($primaryKey)
     {
         $this->primaryKey = $primaryKey;
     }
 
-    protected function getAttribute($key)
+    public function getAttribute($key)
     {
         if (is_null($key) || !array_key_exists($key, $this->attributes)) {
             return null;
         }
         return $this->attributes[$key];
     }
-    protected function setAttributes(): array
+    public function setAttributes(): array
     {
         return $this->attributes;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
+
 
 class ProductsController
 {
@@ -10,7 +12,11 @@ class ProductsController
     {
         global $request;
 
-        var_dump($request->getRouteParams());
+        $slug = $request->getRouteParams()["slug"];
+
+        $user = new User();
+
+        var_dump($user->find($slug));
     }
 
     public function show()
