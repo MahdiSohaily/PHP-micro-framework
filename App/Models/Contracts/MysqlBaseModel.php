@@ -33,22 +33,26 @@ class mysqlBaseModel extends BaseModel
     // read
     public function find(int $id): object
     {
-        return (object)[];
+        return (object) $this->connection->get($this->table, '*', [$this->primaryKey => $id]);
+    }
+    public function getAll(): array
+    {
+        return $this->connection->select($this->table, '*');
     }
     public function get(array $columns, array $where): array
     {
-        return [];
+        return $this->connection->get($this->table, $columns, $where);
     }
 
     // update
 
-    public function update(array $columns, array $where): int
+    public function update(array $data, array $where): int
     {
-        return 0;
+        return $this->connection->update($this->table, $data, $where)->rowCount() ?? -1;
     }
     // delete
     public function delete(array $where): int
     {
-        return 0;
+        return $this->connection->delete($this->table, $where)->rowCount() ?? -1;
     }
 }
