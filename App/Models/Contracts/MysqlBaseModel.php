@@ -8,7 +8,7 @@ use Medoo\Medoo;
 class mysqlBaseModel extends BaseModel
 {
 
-    public function __construct()
+    public function __construct($id = null)
     {
         try {
             $this->connection = new Medoo([
@@ -22,6 +22,10 @@ class mysqlBaseModel extends BaseModel
         } catch (\PDOException $th) {
             throw $th;
         }
+
+        if (!is_null($id)) {
+            return $this->find($id);
+        }
     }
     // create
     public function create(array $data): int
@@ -34,6 +38,9 @@ class mysqlBaseModel extends BaseModel
     public function find(int $id): object
     {
         $record = $this->connection->get($this->table, '*', [$this->primaryKey => $id]);
+        foreach ($record as $key => $value) {
+            $this->setAttribute($key, $value);
+        }
         return $this;
     }
     public function getAll(): array

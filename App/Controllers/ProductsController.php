@@ -14,9 +14,9 @@ class ProductsController
 
         $slug = $request->getRouteParams()["slug"];
 
-        $user = new User();
+        $user = new User($slug);
 
-        var_dump($user->find($slug));
+        print_r($user->name);
     }
 
     public function show()
