@@ -2,11 +2,18 @@
 <?php
 
 use App\Core\Routing\Router;
+use App\Models\User;
 
 include_once('./bootstrap/init.php');
 
+// $user = new User();
+// $user->create(['name' => 'Mahdi', 'email' => 'mahdi@gmail.com']);
+
 $router = new Router();
 $router->run();
+
+
+
 
 // $route = '/posts/{slug}';
 

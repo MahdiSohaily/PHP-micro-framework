@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
-class User
-{
+use App\Models\Contracts\JsonBaseModel;
+
+class User extends JsonBaseModel {
+    
 }

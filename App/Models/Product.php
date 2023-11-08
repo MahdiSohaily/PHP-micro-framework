@@ -1,6 +1,7 @@
 <?php 
 namespace App\Models;
+use App\Models\Contracts\JsonBaseModel;
 
-class Product {
+class Product extends JsonBaseModel{
     
 }
