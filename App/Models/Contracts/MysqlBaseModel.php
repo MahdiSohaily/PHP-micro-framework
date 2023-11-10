@@ -24,7 +24,7 @@ class mysqlBaseModel extends BaseModel
         }
 
         if (!is_null($id)) {
-            return $this->find($id);
+            $this->find($id);
         }
     }
     // create
@@ -37,7 +37,7 @@ class mysqlBaseModel extends BaseModel
     // read
     public function find(int $id): object
     {
-        $record = $this->connection->get($this->table, '*', [$this->primaryKey => $id]);
+        $record = $this->connection->get($this->table, '*', [$this->primaryKey => $id]) ?? [];
         foreach ($record as $key => $value) {
             $this->setAttribute($key, $value);
         }
@@ -62,5 +62,12 @@ class mysqlBaseModel extends BaseModel
     public function delete(array $where): int
     {
         return $this->connection->delete($this->table, $where)->rowCount() ?? -1;
+    }
+
+    public function remove()
+    {
+        $record_id = $this->{$this->primaryKey};
+
+        return $record_id;
     }
 }

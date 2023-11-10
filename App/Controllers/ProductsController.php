@@ -16,7 +16,7 @@ class ProductsController
 
         $user = new User($slug);
 
-        print_r($user->name);
+        print_r($user->remove());
     }
 
     public function show()
