@@ -35,7 +35,7 @@ class mysqlBaseModel extends BaseModel
     }
 
     // read
-    public function find(int $id): object
+    public function find(int $id): object | null
     {
         $record = $this->connection->get($this->table, '*', [$this->primaryKey => $id]) ?? [];
         foreach ($record as $key => $value) {
@@ -45,7 +45,7 @@ class mysqlBaseModel extends BaseModel
     }
     public function getAll(): array
     {
-        return $this->connection->select($this->table, '*');
+        return $this->connection->select($this->table, "*");
     }
     public function get(array $columns, array $where): array
     {
@@ -56,7 +56,8 @@ class mysqlBaseModel extends BaseModel
 
     public function update(array $data, array $where): int
     {
-        return $this->connection->update($this->table, $data, $where)->rowCount() ?? -1;
+        $result = $this->connection->update($this->table, $data, $where);
+        return $result->rowCount() ?? -1;
     }
     // delete
     public function delete(array $where): int
@@ -67,7 +68,13 @@ class mysqlBaseModel extends BaseModel
     public function remove()
     {
         $record_id = $this->{$this->primaryKey};
-
+        $this->delete([$this->primaryKey => $record_id]);
         return $record_id;
+    }
+
+    public function save(): int
+    {
+        $record_id = $this->{$this->primaryKey};
+        return $this->update($this->getAttributes(), [$this->primaryKey => $record_id]);
     }
 }

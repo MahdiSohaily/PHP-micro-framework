@@ -15,8 +15,12 @@ class ProductsController
         $slug = $request->getRouteParams()["slug"];
 
         $user = new User($slug);
+        $user->name = "Somayeh";
+        $user->last_name = "Rezaei";
+        $user->email = "Rezaei@gmail.com";
+        $user->save();
 
-        print_r($user->remove());
+        print_r(json_encode($user->getAttributes()));
     }
 
     public function show()
