@@ -8,6 +8,6 @@ class BlockFirefox implements MiddlewareInterface
 {
     public function handle()
     {
-        echo "Middleware Completed";
+        // echo "Middleware Completed";
     }
 }

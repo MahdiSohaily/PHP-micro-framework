@@ -5,7 +5,7 @@ use App\Middlewares\BlockFirefox;
 
 
 Route::get('/', function () {
-    echo 'Welcome to the Home Page';
+    // echo 'Welcome to the Home Page';
 }, [BlockFirefox::class]);
 
 
