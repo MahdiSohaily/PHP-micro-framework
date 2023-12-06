@@ -64,16 +64,16 @@ class Router
     public function run()
     {
         if (is_null($this->currentRoute)) {
-            $this->dispatch405();
+            $this->dispatch404();
         }
 
         if ($this->invalidRequest($this->request)) {
-            $this->dispatch405();
+            $this->dispatch403();
             die("Invalid request");
         }
 
         if ($this->runMiddleware($this->currentRoute)) {
-            $this->dispatch405();
+            $this->dispatch403();
             die("Invalid request");
         }
 
@@ -88,7 +88,7 @@ class Router
             }
         }
     }
-    private function dispatch405()
+    private function dispatch403()
     {
         header("HTTP/1.0 405 Method Not Allowed");
         view("errors.405");
