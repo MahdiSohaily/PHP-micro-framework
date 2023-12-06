@@ -1,0 +1,16 @@
+{
+  "name": "yadak.local",
+  "version": "1.0.0",
+  "description": "I have created this repository to create a custom PHP MVC micro framework in order to practice PHP advance topics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss build -i ./public/css/styles.css -o ./public/css/output.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.3.6"
+  }
+}
