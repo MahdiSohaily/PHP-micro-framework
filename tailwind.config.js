@@ -5,6 +5,10 @@ module.exports = {
     "./**/*.php",
     "./src/**/*.js", // Add any additional file patterns as needed
   ],
+  direction: {
+    ltr: "ltr",
+    rtl: "rtl",
+  },
   theme: {
     extend: {},
   },

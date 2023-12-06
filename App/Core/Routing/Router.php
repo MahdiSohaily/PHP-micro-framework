@@ -98,7 +98,9 @@ class Router
     private function dispatch404()
     {
         header("HTTP/1.0 404 Not Found");
-        view("errors.404");
+        view("errors.404", [
+            'page_title' => '404',
+        ]);
         die();
     }
 
