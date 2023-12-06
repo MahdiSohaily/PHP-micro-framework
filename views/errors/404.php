@@ -10,6 +10,7 @@
 
 <body>
     <h1 class="text-red-500">Page Not Found</h1>
+    <h1 class="text-red-500">صفحه مورد نظر شما پیدا نشد</h1>
 </body>
 
 </html>
