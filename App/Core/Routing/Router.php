@@ -64,7 +64,7 @@ class Router
     public function run()
     {
         if (is_null($this->currentRoute)) {
-            $this->dispatch404();
+            $this->dispatch405();
         }
 
         if ($this->invalidRequest($this->request)) {
